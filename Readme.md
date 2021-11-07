@@ -26,23 +26,13 @@ You'll also need a copy of the reference genome that matches your LongRanger ana
 
 ## Running the example data set on chr1
 
-* We provide an example image set for testing in **chr1/images/** folder. 
+We provide an example image set for testing in **chr1/images/** folder. Image files are organized in folders named as: *chr1_93011035-93221780_chr1_93011035-93221780* The output will be located in the **chr1/output/** folder. 
 
-* The required folder for test is **chr1/images** folder with image files in it. Image files are organized in folders named as: *chr1_93011035-93221780_chr1_93011035-93221780*
-
-* The output will be formed in **Example/chr1/** folder. You should see the output as in **chr1/output** folder.
-
-* You need to download full genome sequence for Mus musculus (Mouse) as provided by UCSC : 
-*https://bioconductor.org/packages/release/data/annotation/html/BSgenome.Mmusculus.UCSC.mm10.html*
-This file *UCSC_mm10.fa* must be located in *tools* folder.
-
-
-To do a test run using this data set, run the following command
+To do a test run using this data set, run the following command from the SVJAM installation directory 
 
 ```
 python SVJAM chr1
 ```
-
 
 ## Downloading your own images for analysis 
 * Install the [loupe browser from 10X Genomics](https://www.10xgenomics.com/products/loupe-browser).
