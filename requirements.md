@@ -25,3 +25,5 @@
 * selenium==3.141.0
 
 * seaborn==0.11.1
+
+* opencv-python==4.5.1.48
