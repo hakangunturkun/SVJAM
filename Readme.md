@@ -24,7 +24,7 @@ pip install -r requirements.txt
 You'll also need a copy of the reference genome that matches your LongRanger analysis and place that in the RefGenome folder (file needs to be unzipped, with the extion name *.fa*)
 
 
-## Running the example data set on chr1
+## Analyzing the example data set on chr1
 
 We provide an example image set for testing in **chr1/images/** folder. Image files are organized in folders named as: *chr1_93011035-93221780_chr1_93011035-93221780* The output will be located in the **chr1/output/** folder. 
 
@@ -34,7 +34,7 @@ To do a test run using this data set, run the following command from the SVJAM i
 python SVJAM chr1
 ```
 
-## Downloading your own images for analysis 
+## Obtaining your own images for analysis 
 * Install the [loupe browser from 10X Genomics](https://www.10xgenomics.com/products/loupe-browser).
 * Generate *.loupe files from linked-read WGS by using [longranger](https://support.10xgenomics.com/genome-exome/software/pipelines/latest/what-is-long-ranger).
 * Open and organize **image_download/open_loupe.sh** then run it.
