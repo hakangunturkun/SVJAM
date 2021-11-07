@@ -8,7 +8,7 @@ Gunturkun, M. H., Villani, F., Colonna, V., Ashbrook, D., Williams, R. W.,and Ch
 
 ## Flowchart:
 
-![Alt text](../flowchart/pipeline.png?raw=true "Summary of the pipeline")
+![pipeline](https://github.com/hakangunturkun/SVJAM/blob/master/flowchart/pipeline.png "Summary of the pipeline")
 
 ## Running:
 
@@ -30,6 +30,11 @@ chmod +x SVJAM
 
 * The output will be formed in **Example/chr1/** folder. You should see the output as in **Example/chr1/output** folder.
 
+* You need to download full genome sequence for Mus musculus (Mouse) as provided by UCSC : 
+*https://bioconductor.org/packages/release/data/annotation/html/BSgenome.Mmusculus.UCSC.mm10.html*
+This file *UCSC_mm10.fa* must be located in *tools* folder.
+
+
 ## Downloading images:
 * Install loupe server from 10X Genomics.
 * Generate *.loupe* files by using linked-read WGS.
@@ -40,3 +45,4 @@ chmod +x SVJAM
 
 * python == 3.8
 * see requirements.md for list of packages and versions
+* full genome sequence for mouse MM10
