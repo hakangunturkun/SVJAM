@@ -28,9 +28,7 @@ You'll also need a copy of the reference genome that matches your LongRanger ana
 
 We provide an example image set for testing in **chr1/images/** folder. Image files are organized in folders named as: *chr1_93011035-93221780_chr1_93011035-93221780* The output will be located in the **chr1/output/** folder. 
 
-You need to download reference genome for Mus musculus (Mouse) as provided by UCSC : 
-*https://bioconductor.org/packages/release/data/annotation/html/BSgenome.Mmusculus.UCSC.mm10.html*
-This file *UCSC_mm10.fa* must be located in **RefGenome** folder.
+You need to download the [mouse reference genome from UCSC](https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/mm10.fa.gz), uncompress it, and put it in the **RefGenome** folder.
 
 To do a test run using this data set, run the following command from the SVJAM installation directory 
 
