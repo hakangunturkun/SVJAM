@@ -33,7 +33,7 @@ You need to download the [mouse reference genome from UCSC](https://hgdownload.s
 To do a test run using this data set, run the following command from the SVJAM installation directory 
 
 ```
-python SVJAM chr1
+python SVJAM.py chr1
 ```
 
 ## Obtaining your own images for analysis 
