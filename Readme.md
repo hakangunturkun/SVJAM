@@ -9,7 +9,7 @@ SVJAM jointly detects and genotypes large structural variants (SVs) from linked-
 ## Installation 
 SVJAM was developed on python 3.8
 
-Run the following command to clone the repository   
+Run the following command to clone the repository
 ```
 git clone https://github.com/hakangunturkun/SVJAM
 ```
@@ -21,12 +21,16 @@ cd SVJAM
 pip install -r requirements.txt 
 ```
 
-You'll also need a copy of the reference genome that matches your LongRanger analysis and place that in the RefGenome folder (file needs to be unzipped, with the extion name *.fa*)
+You'll also need a copy of the reference genome that matches your LongRanger analysis and place that in the **RefGenome** folder (file needs to be unzipped, with the extension name *.fa*)
 
 
 ## Analyzing the example data set on chr1
 
 We provide an example image set for testing in **chr1/images/** folder. Image files are organized in folders named as: *chr1_93011035-93221780_chr1_93011035-93221780* The output will be located in the **chr1/output/** folder. 
+
+You need to download reference genome for Mus musculus (Mouse) as provided by UCSC : 
+*https://bioconductor.org/packages/release/data/annotation/html/BSgenome.Mmusculus.UCSC.mm10.html*
+This file *UCSC_mm10.fa* must be located in **RefGenome** folder.
 
 To do a test run using this data set, run the following command from the SVJAM installation directory 
 
@@ -43,5 +47,3 @@ python SVJAM chr1
 ## Citation:
 
 Gunturkun, M.H., Villani, F., Colonna, V., Ashbrook, D., Williams, R.W. and Chen, H. (2021). SVJAM:  Joint analysis of structural variants usinglinked read sequencing data. bioRxiv. [doi:10.1101/2021.11.02.467006](https://www.biorxiv.org/content/10.1101/2021.11.02.467006v1)
-
-

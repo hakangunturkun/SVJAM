@@ -21,28 +21,15 @@ import time
 from sklearn.decomposition import PCA
 
 def joint_analysis(args1,args2, args3):
-    ########################## Need to change here ################
+
+    ######## Need to change here if the files are changed #############
     
-    #loc = 'chr4_112361825-112865466'
-    #path = ./images/'
-    #
-    # fill the first column of np.array to concatenate it with the other columns
-    # hence specify one sample (fill the first column with this)
-    sample_image="4512-JFI-0341_BXD149_loupe"
-    
-    #three types of images
-    #type1= images here
-    ###type2 = different chrs
-    #type3= 1d images
-    
-    #choose the type please:
-    
-    #image_type = 1
+    sample_image="4512-JFI-0341_BXD149_loupe"  
     
     alt = "4512-JFI-0334_DBA_2J_loupe"
     ref = "4512-JFI-0333_C57BL_6J_loupe"
     
-    ####################################################
+    ####################################################################
     
     deletion_files=[]
     ls_sum_len =[]
@@ -55,26 +42,8 @@ def joint_analysis(args1,args2, args3):
     log_file = open(folder_path+loc + '_' + loc + '.log',"w")
     sys.stdout = log_file
     
-    #print ("reading "+path+ loc + '_' + loc + '_' + sample_image + '.png')
     print(path+ loc + '_' + loc + '_' + sample_image + '.png')
-    
-    '''
-    img = cv2.imread(path+ loc + '_' + loc + '_' + sample_image + '.png',0)
-    crop_img = img[0:1024,144:1168]
-    for i in range(2,1021):
-        crop_img[i][1025-i]=255
-        crop_img[i][1024-i]=255
-        crop_img[i][1023-i]=255
-        crop_img[i][1022-i]=255
-        crop_img[i][1021-i]=255
-    img_all_sample = (crop_img / 255).reshape(-1,1)
-    img_all = np.array(img_all_sample)
-    '''
-    
-    #filename_ls = [sample_image]
-    
-    #filename_long = [loc + '_' + loc + '_' + sample_image + '.png']
-    
+
     filename_ls=[]
     filename_long=[]
     t=0
@@ -83,9 +52,6 @@ def joint_analysis(args1,args2, args3):
         if not filename.endswith(".png"):
             continue
         t+=1
-        #if filename != path+loc + '_' + loc + '_' + sample_image + '.png':
-        #grayscale = Image.open(path+filename).convert('L')
-        #print(filename)
         filename_long.append(filename)
         img = cv2.imread(path+filename,0)
         crop_img = img[0:1024,144:1168]    
@@ -103,8 +69,6 @@ def joint_analysis(args1,args2, args3):
         filename1 = filename.split(loc + '_' + loc + '_')[1]
         filename2 = filename1.split(".png")[0]
         filename_ls.append(filename2)
-        #filename3 = re.search('_(.+?)_loupe',filename2)
-        #filename_gvcf.append(filename3.group(1))
         ls_sum=[]
         
         
@@ -137,24 +101,7 @@ def joint_analysis(args1,args2, args3):
         if(261120 in ls_sum):
             ls_sum_len.append(ls_sum.count(261120))
             deletion_files.append(filename2)
-                
-    #filename_ls.remove(sample_image)
-    #filename_long.remove(loc + '_' + loc + '_' + sample_image + '.png')
-    #print(filename_ls)
-    
-    '''
-    img = cv2.imread(path+ loc + '_' + loc + '_' + sample_image + '.png',0)
-    crop_img = img[0:1024,144:1168]
-    for i in range(2,1021):
-        crop_img[i][1025-i]=255
-        crop_img[i][1024-i]=255
-        crop_img[i][1023-i]=255
-        crop_img[i][1022-i]=255
-        crop_img[i][1021-i]=255
-    img_all_sample = (crop_img / 255).reshape(-1,1)
-    img_all=np.delete((img_all_sample,img_r),axis=1)
-    
-    '''
+
     if (deletion_files==[]):
         print('There are no deletions in this region')
     elif(len(deletion_files)==1):
@@ -237,13 +184,9 @@ def joint_analysis(args1,args2, args3):
                     elif li[i]-li[i-1]<skip_size:
                         li_sep.append(li[i])
                         if(i == len(li)-1):
-                            #print(li_sep)
                             return(i+1)
                     else:
-                        #print(k)
-                        #li_sep.append(li[i-1])
                         k = i+1
-                        #print(li_sep)
                         return(k)
                         break
                 
@@ -255,8 +198,6 @@ def joint_analysis(args1,args2, args3):
             while i<len(li):
         	    t = find_del_interval(i)
         	    i=t
-        	    #print(li_sep[-1]-li_sep[0])
-        	    #print(min_sv_size)
         	    if(len(li_sep)>1 and (li_sep[-1]-li_sep[0]>min_sv_size)):
         	        print('Deletion interval in pixels:[',li_sep[0],',',li_sep[-1],']')
         	        print('Deletion interval in bp:[',int(int(loc_begin)+magnify*int(li_sep[0])),',',int(int(loc_begin)+magnify*int(li_sep[-1])),']')
@@ -280,20 +221,7 @@ def joint_analysis(args1,args2, args3):
     pca = PCA(n_components=2)
     prin2 = pca.fit_transform(X_tr)
     prin2_tr = np.transpose(prin2)
-    
-    
-    #angle = (100*np.pi)/(180)
-    #rotate = np.array([[np.cos(angle),-np.sin(angle)], [np.sin(angle),np.cos(angle)]])
-    #prin2_tr = np.matmul(rotate,prin2_tr)
-    
-    #fig=plt.figure()
-    #ax=fig.add_axes([0,0,1,1])
-    #ax.scatter(prin2_tr[0], prin2_tr[1], color='r')
-    #ax.set_xlabel('x')
-    #ax.set_ylabel('y')
-    #ax.set_title('scatter plot')
-    #plt.show()
-    
+        
     df_k = pd.DataFrame(prin2,columns=['x','y'])
     
     df_graph = pd.DataFrame({
@@ -363,7 +291,6 @@ def joint_analysis(args1,args2, args3):
         w = df_temp.iloc[df_temp.index[df_temp['name'] == name].tolist()[0],1]
         name_index = df_temp.index[df_temp['name'] == name][0]
         label_w = np.where(labels==w)[0]
-        #np.where(labels== (df_temp.iloc[df_temp.index[df_temp['name'] == alt].tolist()[0],1])[0])):
         dist_dba2j = dist_to_DBA_2J/mean_dist_ref_DBA_2J
         dist_c57bl = dist_to_C57BL/mean_dist_ref_C57BL
         dist_het = abs((dist_c57bl-dist_dba2j)/np.sqrt(2))
@@ -432,9 +359,6 @@ def joint_analysis(args1,args2, args3):
         
         sum1=(0.0,0.0)
         for i in label_het[0]:
-            #print(i)
-            #print(df_temp.iloc[i]['name'])
-            #print(distance_to_centers(df_temp.iloc[i]['name'], labels,puns))
             sum1 = np.array(sum1)+np.array(distance_to_centers(df_temp.iloc[i]['name'], labels,puns))
         aver = sum1/len(label_het[0])        
         return(aver)
@@ -457,14 +381,12 @@ def joint_analysis(args1,args2, args3):
         df_k = pd.DataFrame(prin2,columns=['x','y'])
         df_np = np.array(df_k)
         df_np=rotation(angle, df_np)
-        #cluster_metrics =[]
         for i in range(df_k.shape[0]):
             for j in range(df_k.shape[0]):
                 matr[i,j] = (5*abs(df_np[i,0]-df_np[j,0])+abs(df_np[i,1]-df_np[j,1]))
         clt = AgglomerativeClustering(linkage='single', affinity='precomputed', n_clusters=3)
         model = clt.fit(matr)
         labels = clt.labels_
-        #cluster_metrics.append(metrics.calinski_harabasz_score(matr, labels))  
         df_temp = pd.DataFrame(data = {'name' : filename_ls,  'label': clt.labels_})
         total_within = 0 
         for name in df_temp['name']:

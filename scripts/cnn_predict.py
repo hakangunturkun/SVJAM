@@ -37,12 +37,8 @@ def create_model(kernel_size ,
                 first_filters  ,
                 second_filters ,
                 third_filters  ,
-                #fourth_filters  ,
-                #fifth_filters  ,
-                #sixth_filters  ,
                 first_dense,
                 second_dense,
-                #third_dense,
                 dropout_conv ,
                 dropout_dense ):
 
@@ -79,8 +75,6 @@ def create_model(kernel_size ,
     model.compile(optimizer=Adam(lr=0.0001), loss='categorical_crossentropy', metrics=["categorical_accuracy"])
     return model
 
-
-
 def prediction(args1,args2,args3):
     config = ConfigProto()
     config.gpu_options.allow_growth = True
@@ -98,15 +92,10 @@ def prediction(args1,args2,args3):
     model.build((512,512,3))
     #model.summary()
 
-    #checkpoint_path = "/home/hakan/Documents/CNN_for_joint_calling/model/training_1/cp-0068.ckpt" 
-    #checkpoint_dir = os.path.dirname(checkpoint_path)
     checkpoint_path = "./tools/cnn_weights.ckpt"
 
     # Loads the weights
     model.load_weights(checkpoint_path)
-    
-
-    #path=args1
 
     def files(args1):
         for file in os.listdir(args1):
@@ -119,7 +108,6 @@ def prediction(args1,args2,args3):
         name_of_folder = str(file)
 
         path_manual = args1+name_of_folder+'/'
-        #testdf_manual=pd.read_csv(r'/home/hakan/Documents/Inversions/all_inv_512_csv/'+name_of_folder+'.csv',sep=',',dtype=str)
         try:
             testdf_manual=pd.read_csv(args2+name_of_folder+'.csv',sep='\t',dtype=str)
         except FileNotFoundError:
@@ -136,22 +124,10 @@ def prediction(args1,args2,args3):
             img_array = tf.expand_dims(img_array, 0)  # Create batch axis
             predictions = model.predict(img_array, steps=1)
             score = predictions[0]
-            #print(filename)
-            #w = testdf.iloc[df_temp.index[df_temp['name'] == name].tolist()[0],1]
-            #w = testdf_manual.iloc[testdf_manual.index[testdf_manual['fullname'] == filename].tolist()[0],0]
-            #print(w)
-            #testdf_manual.loc[testdf_manual['fullname'] == filename, 'predictions']=score[0]
             if round(score[0]) == 1:
                 testdf_manual.loc[testdf_manual['fullname'] == filename, 'predictions'] = 0
             elif round(score[1]) == 1:
                 testdf_manual.loc[testdf_manual['fullname'] == filename, 'predictions'] = 1
             elif round(score[2]) == 1:
                 testdf_manual.loc[testdf_manual['fullname'] == filename, 'predictions'] = 2
-            #if score[2] == 1:
-            #   testdf_manual.loc[testdf_manual['fullname'] == filename, 'predictions'] = 2
-            #if score[0] >= 0.5:
-            #    testdf_manual.loc[testdf_manual['fullname'] == filename, 'predictions'] = score[0]
-            #if score[1] >= 0.5:
-            #    testdf_manual.loc[testdf_manual['fullname'] == filename, 'predictions'] = score[1]
-        #testdf_manual.to_csv('/home/hakan/Documents/CNN_for_joint_calling/model/test_cases/inv/'+name_of_folder+'_pred.csv')
         testdf_manual.to_csv(args3+name_of_folder+'_pred.csv')
